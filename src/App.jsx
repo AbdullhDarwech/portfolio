@@ -12,7 +12,7 @@ export default function App(){
     <LanguageProvider>
       <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-gray-900">
         <Header />
-        <main className=" mx-auto px-4 sm:px-6">
+        <main className=" mx-auto">
           <Hero />
           <About />
           <Projects />

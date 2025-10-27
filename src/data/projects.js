@@ -27,7 +27,7 @@ export const projects = [
       en: "Interactive portfolio for building a fast and attractive UI."
     },
     image: "/projects/portfolio.png",
-    link: "https://portfolio1.netlify.com",
+    link: "https://github.com/AbdullhDarwech/portfolio",
   },
   {
     name: { ar: "تطبيق متجر", en: "Store App" },
@@ -36,15 +36,15 @@ export const projects = [
       en: "Application for buying and selling products using React and Tailwind."
     },
     image: "/projects/store.png",
-    link: "https://your-store.com",
+    link: "https://github.com/AbdullhDarwech/Store-Cars",
   },
   {
-    name: { ar: "منصة لأرساد سياحي", en: "Tourist Platform" },
+    name: { ar: "موقغ لمطعم", en: "Tourist Platform" },
     description: { 
-      ar: "منصة للأرساد السياحي عن طريق غوغل ماب.",
+      ar: "https://project-resturant1.netlify.app/",
       en: "Platform for tourist guidance using Google Maps."
     },
-    image: "/projects/tasks.png",
-    link: "https://sauditga.com/Taheel",
+    image: "/projects/resturant1.png",
+    link: "https://project-resturant1.netlify.app/",
   },
 ];

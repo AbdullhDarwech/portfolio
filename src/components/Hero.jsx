@@ -1,86 +1,136 @@
-import React, { useContext } from "react";
-import { motion, useViewportScroll, useSpring, useTransform } from "framer-motion";
+import React, { useContext, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { LanguageContext } from "../context/LanguageContext";
 
 export default function Hero() {
   const { language } = useContext(LanguageContext);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const { scrollY } = useViewportScroll();
-
-  // تحريك الخلفية والصورة والنص بشكل سلس
-  const bgY = useTransform(scrollY, [0, 500], [0, -50]);
-  const imgY = useTransform(scrollY, [0, 500], [0, -100]);
-  const textY = useTransform(scrollY, [0, 500], [0, -20]);
-
-  // تطبيق spring لجعل الحركة سلسة
-  const smoothBgY = useSpring(bgY, { stiffness: 50, damping: 20 });
-  const smoothImgY = useSpring(imgY, { stiffness: 50, damping: 20 });
-  const smoothTextY = useSpring(textY, { stiffness: 50, damping: 20 });
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 800); // تأخير الدخول
+    return () => clearTimeout(timer);
+  }, []);
 
   const texts = {
     en: {
-      greeting: "👋 Hello, I'm",
-      name: "Abdulla",
+      greeting: "Hello, I’m",
+      name: "Abdulla Darwich",
+      role: "Front-End Developer",
       description:
-        "A passionate Front-End Developer creating interactive web experiences combining beauty and speed using React, Tailwind CSS, and Framer Motion.",
-      projectsBtn: "View My Projects 🚀",
-      contactBtn: "Contact Me ✉️",
+        "I create modern, responsive, and high-performance web interfaces with React, Tailwind, and Framer Motion.",
+      projectsBtn: "Explore Projects 🚀",
+      contactBtn: "Let’s Talk ✉️",
     },
     ar: {
-      greeting: "👋 مرحباً، أنا",
-      name: "عبدالله",
+      greeting: "مرحباً، أنا",
+      name: "عبدالله درويش",
+      role: "مطور واجهات أمامية",
       description:
-        "مطور واجهات أمامية شغوف بإنشاء تجارب ويب تفاعلية تجمع بين الجمال والسرعة باستخدام React و Tailwind و Framer Motion.",
-      projectsBtn: "عرض مشاريعي 🚀",
+        "أبني واجهات ويب عصرية وسريعة الاستجابة باستخدام React و Tailwind و Framer Motion بتصميم عصري مميز.",
+      projectsBtn: "استكشف مشاريعي 🚀",
       contactBtn: "تواصل معي ✉️",
     },
   };
 
   return (
-    <section id="hero" className="relative flex items-center justify-center min-h-[100vh] overflow-hidden">
-      {/* الخلفية */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 opacity-40 blur-3xl z-20"
-        style={{ y: smoothBgY }}
-      />
-
-      {/* الصورة تغطي كامل الخلفية */}
-      <motion.img
-        src="/your-photo.png"
-        alt={texts[language].name}
-        className="absolute inset-0 w-full h-full object-cover z-10 opacity-100"
-        style={{ y: smoothImgY }}
-      />
-
-      {/* النصوص */}
-      <motion.div
-        className="relative max-w-2xl text-center md:text-start z-10 px-6 md:px-0"
-        style={{ y: smoothTextY }}
+    <section id="hero" className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden bg-[#0a0a0a] text-white">
+      {/* 🎥 خلفية فيديو */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
       >
-        <h1 className="text-4xl sm:text-6xl font-bold text-white drop-shadow-lg">
-          {texts[language].greeting}{" "}
-          <span className="text-indigo-200">{texts[language].name}</span>
-        </h1>
+        <source src="/video.mp4" type="video/mp4" />
+      </video>
 
-        <p className="mt-5 text-lg text-white leading-relaxed drop-shadow-sm">
-          {texts[language].description}
-        </p>
+      {/* 🌈 تدرجات الإضاءة */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/60 via-purple-900/30 to-slate-900/60 mix-blend-overlay" />
+      <motion.div
+        className="absolute -top-32 -left-32 w-96 h-96 bg-indigo-500/30 rounded-full blur-[120px]"
+        animate={{ y: [0, 50, 0], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-[160px]"
+        animate={{ y: [0, -40, 0], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
 
-        <div className="mt-10 flex justify-center md:justify-start gap-5">
-          <a
-            href="#projects"
-            className="px-7 py-3 bg-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+      {/* ✨ تأثير دخول الصفحة */}
+      <AnimatePresence>
+        {!isLoaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            className="fixed inset-0 bg-[#0a0a0a] flex items-center justify-center text-white text-3xl font-bold z-50"
           >
-            {texts[language].projectsBtn}
-          </a>
-          <a
-            href="#contact"
-            className="px-7 py-3 border border-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-600 hover:text-white transition-all duration-300"
+            {language === "ar" ? "جارٍ التحميل..." : "Loading..."}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 💎 المحتوى */}
+      {isLoaded && (
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.3, ease: "easeOut" }}
+          className="relative z-10 text-center px-6"
+        >
+          <p className="text-lg sm:text-xl text-gray-400 tracking-wide">
+            {texts[language].greeting}
+          </p>
+
+          <h1 className="mt-3 text-5xl sm:text-7xl font-extrabold bg-gradient-to-r from-indigo-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(99,102,241,0.3)]">
+            {texts[language].name}
+          </h1>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-2 text-2xl sm:text-3xl font-medium text-gray-300"
           >
-            {texts[language].contactBtn}
-          </a>
-        </div>
-      </motion.div>
+            {texts[language].role}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-6 max-w-2xl mx-auto text-gray-400 leading-relaxed text-base sm:text-lg"
+          >
+            {texts[language].description}
+          </motion.p>
+
+          {/* 🚀 الأزرار */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-10 flex flex-wrap justify-center gap-6"
+          >
+            <a
+              href="#projects"
+              className="relative group px-8 py-3 text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-indigo-500/30"
+            >
+              <span className="relative z-10">{texts[language].projectsBtn}</span>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300" />
+            </a>
+
+            <a
+              href="#contact"
+              className="px-8 py-3 text-lg font-semibold rounded-xl border border-indigo-400 text-indigo-300 hover:bg-indigo-500/10 hover:scale-105 transition-all duration-300"
+            >
+              {texts[language].contactBtn}
+            </a>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }
