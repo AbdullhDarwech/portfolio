@@ -20,15 +20,7 @@ export const projects = [
     image: "/projects/digital-card.jpg",
     link: "https://cardly1.netlify.app/",
   },
-  {
-    name: { ar: "موقعي الشخصي", en: "My Portfolio" },
-    description: { 
-      ar: "بورتفوليو تفاعلي لبناء واجهة مستخدم جذابة وسريعة.",
-      en: "Interactive portfolio for building a fast and attractive UI."
-    },
-    image: "/projects/portfolio.png",
-    link: "https://github.com/AbdullhDarwech/portfolio",
-  },
+
   {
     name: { ar: "تطبيق متجر", en: "Store App" },
     description: { 
@@ -39,12 +31,13 @@ export const projects = [
     link: "https://github.com/AbdullhDarwech/Store-Cars",
   },
   {
-    name: { ar: "موقغ لمطعم", en: "Tourist Platform" },
+    name: { ar: "موقع لمطعم", en: "Restaurant Website" },
     description: { 
-      ar: "https://project-resturant1.netlify.app/",
-      en: "Platform for tourist guidance using Google Maps."
+      ar: "موقع مطعم يقدم قائمة طعام متنوعة تحتوي على فئات مختلفة من الأكلات، مع عرض صورها ووصفها بطريقة جذابة وسهلة التصفح.",
+      en: "A restaurant website showcasing a diverse food menu with categorized dishes, detailed descriptions, and appealing images for an interactive browsing experience."
     },
     image: "/projects/resturant1.png",
     link: "https://project-resturant1.netlify.app/",
   },
+  
 ];
