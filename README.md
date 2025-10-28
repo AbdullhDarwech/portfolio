@@ -11,6 +11,9 @@ npm install
 ```bash
 npm run dev
 ```
+npm run build
+
+npm install gh-pages --save-dev
 
 3. Open the URL shown by Vite (usually http://localhost:5173)
 
